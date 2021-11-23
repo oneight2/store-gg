@@ -1,10 +1,21 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/no-unknown-property */
+import { useRouter } from "next/router"
+import { useEffect } from "react"
 import Image from "next/image"
 import Footer from "../../components/organism/Footer"
 import Navbar from "../../components/organism/Navbar"
 import TopUpForm from "../../components/organism/TopUpForm"
 import TopUpItem from "../../components/organism/TopUpItem"
 export default function detail() {
+    const { query, isReady } = useRouter();
+    useEffect(() => {
+        if (isReady) {
+            console.log(`router sudah tersedia`, query.id)
+        } else {
+            console.log(`router belum tersedia`)
+        }
+    }, [isReady])
     return (
         <>
             <Navbar />

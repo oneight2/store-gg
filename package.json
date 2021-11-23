@@ -7,12 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -s ./public -p 6006",
     "build-storybook": "build-storybook"
   },
   "dependencies": {
     "animate.css": "^4.1.1",
     "aos": "^2.3.4",
+    "axios": "^0.24.0",
     "classnames": "^2.3.1",
     "next": "11.1.2",
     "react": "17.0.2",
