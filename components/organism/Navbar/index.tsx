@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 import Auth from "./Auth"
 import Menu from "./menu"
 import ToggleMenu from "./ToggleMenu"
@@ -7,7 +8,7 @@ export default function Navbar() {
             <section>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light bg-white pt-lg-40 pb-lg-40 pt-30 pb-50">
                     <div className="container-fluid">
-                        <a className="navbar-brand" href="">
+                        <a className="navbar-brand" href="/">
                             <img src="/icon/logo.svg" alt="" />
                         </a>
                         <ToggleMenu />

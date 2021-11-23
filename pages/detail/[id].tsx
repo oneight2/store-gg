@@ -1,17 +1,31 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/no-unknown-property */
 import { useRouter } from "next/router"
-import { useEffect } from "react"
-import Image from "next/image"
+import { useCallback, useEffect, useState } from "react"
 import Footer from "../../components/organism/Footer"
 import Navbar from "../../components/organism/Navbar"
 import TopUpForm from "../../components/organism/TopUpForm"
 import TopUpItem from "../../components/organism/TopUpItem"
+import { getVoucherDetail } from "../../services/player"
 export default function detail() {
     const { query, isReady } = useRouter();
+    const [dataItem, setDataItem] = useState({
+        name: '',
+        thumbnail: '',
+        category: {
+            name: ''
+        }
+    })
+
+    const getVoucherDetailAPI = useCallback(async (id) => {
+        const data = await getVoucherDetail(id)
+        console.log('detai voucher', data)
+        setDataItem(data)
+    }, [])
     useEffect(() => {
         if (isReady) {
             console.log(`router sudah tersedia`, query.id)
+            getVoucherDetailAPI(query.id)
         } else {
             console.log(`router belum tersedia`)
         }
@@ -28,15 +42,10 @@ export default function detail() {
                     </div>
                     <div className="row">
                         <div className="col-xl-3 col-lg-4 col-md-5 pb-30 pb-md-0 pe-md-25 text-md-start">
-                            <div className="row align-items-center">
-                                <div className="col-md-12 col-4">
-                                    <Image src="/img/Thumbnail-3.png" width="280" height="380" className="img-fluid" alt="" />
-                                </div>
-                                <TopUpItem platform='mobile' />
-                            </div>
+                            <TopUpItem data={dataItem} platform='mobile' />
                         </div>
                         <div className="col-xl-9 col-lg-8 col-md-7 ps-md-25">
-                            <TopUpItem platform='dekstop' />
+                            <TopUpItem data={dataItem} platform='dekstop' />
                             <hr />
                             <TopUpForm />
                         </div>
