@@ -27,5 +27,5 @@ export interface BankTypes{
 export interface PaymentItemTypes{
     _id:string,
     type:string
-    banks: BankTypes
+    banks: BankTypes[]
 }
