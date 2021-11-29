@@ -16,3 +16,10 @@ export async function getVoucherDetail(id: any){
     const response = axiosResponse.data
     return response.data
 }
+export async function getCategoryList(){
+    const END_POINT = `players/category`
+
+    const axiosResponse = await axios.get(`${ROOT_API}/${API_VER}/${END_POINT}`)
+    const response = axiosResponse.data
+    return response.data
+}
