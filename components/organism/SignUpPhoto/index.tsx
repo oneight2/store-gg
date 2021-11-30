@@ -43,9 +43,9 @@ export default function SignUpPhoto() {
         data.append('favorite', favorite);
         data.append('phoneNumber', '089699838615')
 
-        const result = await setSignUp(data)
-        if (result.error === 1) {
-            toast.error(result.message)
+        const response = await setSignUp(data)
+        if (response.error) {
+            toast.error(response.message)
         } else {
             toast.success('Register Berhasil')
             router.push('/sign-up-success')

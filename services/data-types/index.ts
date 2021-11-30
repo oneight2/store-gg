@@ -29,3 +29,8 @@ export interface PaymentItemTypes{
     type:string
     banks: BankTypes[]
 }
+
+export interface SigninTypes{
+    email:string,
+    password:string
+}
