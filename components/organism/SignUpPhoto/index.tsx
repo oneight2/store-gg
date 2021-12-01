@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import Image from "next/image"
 import Link from "next/link"
@@ -63,7 +64,7 @@ export default function SignUpPhoto() {
                                     <img src={imgPreview} className="img-upload" alt="signup-photo" />
                                 </label>
                                 <input id="avatar" type="file" name="avatar" accept="image/png, image/jpeg" onChange={(event) => {
-                                    const img = event.target.files[0];
+                                    const img: any = event.target.files[0];
                                     setImgPreview(URL.createObjectURL(img))
                                     setImage(img)
 
