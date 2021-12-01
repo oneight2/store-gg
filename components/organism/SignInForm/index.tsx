@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Cookies from 'js-cookie'
 import { setSignIn } from "../../../services/auth";
 export default function SignInForm() {
     const [email, setEmail] = useState('')
@@ -16,15 +17,14 @@ export default function SignInForm() {
             toast.error('Email dan Password wajib diisi!!!');
         } else {
             const response = await setSignIn(data);
-            console.log(response)
             if (response.error) {
                 toast.error(response.message);
             } else {
                 toast.success('Login Berhasil');
-                // const { token } = response.data;
-                // const tokenBase64 = btoa(token);
-                // Cookies.set('token', tokenBase64, { expires: 1 });
-                // router.push('/');
+                const token = response.data;
+                const tokenBase64 = btoa(token);
+                Cookies.set('token', tokenBase64, { expires: 1 });
+                router.push('/');
             }
         }
     }
