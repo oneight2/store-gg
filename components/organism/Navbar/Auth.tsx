@@ -5,8 +5,6 @@ import Cookies from 'js-cookie'
 import jwtDecode from 'jwt-decode'
 import { JWTPayloadTypes, UserTypes } from '../../../services/data-types'
 import { useRouter } from 'next/router'
-import { toast, ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css';
 
 
 interface AuthProps {
@@ -38,7 +36,6 @@ export default function Auth(props: AuthProps) {
     const onLogout = () => {
         Cookies.remove('token')
         setIsLogin(false)
-        toast.info('Logout Success', { position: 'bottom-left' })
         router.push('/')
     }
 
@@ -77,7 +74,6 @@ export default function Auth(props: AuthProps) {
                         </ul>
                     </div>
                 </li>
-                <ToastContainer />
             </>
         )
     }
@@ -88,7 +84,6 @@ export default function Auth(props: AuthProps) {
                     <a className="btn btn-sign-in d-flex justify-content-center ms-lg-2 rounded-pill" role="button">SignIn</a>
                 </Link>
             </li>
-            <ToastContainer />
         </>
     )
 }

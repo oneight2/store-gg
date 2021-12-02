@@ -1,10 +1,10 @@
 import React from 'react'
 
 export default function PaymentItem(props: any) {
-    const { _id, type, bankName } = props
+    const { _id, type, bankName, onChange } = props
     return (
         <label className="col-lg-4 col-sm-6 ps-md-15 pe-md-15 pt-md-15 pb-md-15 pt-10 pb-10"
-            htmlFor={_id}>
+            htmlFor={_id} onChange={onChange}>
             <input className="d-none" type="radio" id={_id} name="paymentMethod"
                 value={_id} />
             <div className="detail-card">

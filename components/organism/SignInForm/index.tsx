@@ -2,8 +2,7 @@ import Image from "next/dist/client/image"
 import Link from "next/link"
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react"
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 import Cookies from 'js-cookie'
 import { setSignIn } from "../../../services/auth";
 export default function SignInForm() {
@@ -63,7 +62,6 @@ export default function SignInForm() {
                     </div>
                 </div>
             </form>
-            <ToastContainer />
 
         </>
     )

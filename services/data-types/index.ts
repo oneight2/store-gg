@@ -15,7 +15,8 @@ export interface NominalItemTypes{
     _id:string,
     coinName: string,
     coinQuantity: number,
-    price:number
+    price:number,
+    onChange: ()=>void
 }
 export interface BankTypes{
     map: any;
