@@ -1,28 +1,51 @@
+import { useRouter } from "next/router"
+import { useState } from "react"
+import { toast } from "react-toastify"
+import { setCheckout } from "../../../services/player"
 
 export default function CheckoutConfirmation() {
+    const router = useRouter()
+    const [checkbox, setCheckbox] = useState(false)
+
+    const getLocalItem = localStorage.getItem('data-item')
+    const getLocalTopup = localStorage.getItem('topup-data')
+
+    const dataItem = JSON.parse(getLocalItem)
+    const dataTopup = JSON.parse(getLocalTopup)
+
+    const onSubmit = async () => {
+
+        if (!checkbox) {
+            toast.error('Pastikan Anda Telah Menyetujui Pembayaran')
+        } else {
+            const data = {
+                voucher: dataItem._id,
+                nominal: dataTopup.nominalItem._id,
+                payment: dataTopup.paymentItem.payment._id,
+                bank: dataTopup.paymentItem.bank._id,
+                name: dataTopup.bankAccountName,
+                accountUser: dataTopup.verifyID
+            }
+
+            const response = await setCheckout(data)
+            if (response.error) {
+                toast.error(response.message)
+            } else {
+                toast.success('checkout Berhasil!')
+                router.push('/completed-checkout')
+            }
+        }
+    }
     return (
         <>
-            <div className="payment pt-md-50 pb-md-50 pt-10 pb-10">
-                <h2 className="fw-bold text-xl color-palette-1 mb-20">Payment Informations</h2>
-                <p className="text-lg color-palette-1 mb-20">Your Account Name <span className="purchase-details">Masayoshi
-                    Angga Zero</span></p>
-                <p className="text-lg color-palette-1 mb-20">Type <span className="payment-details">Worldwide Transfer</span>
-                </p>
-                <p className="text-lg color-palette-1 mb-20">Bank Name <span className="payment-details">Mandiri</span></p>
-                <p className="text-lg color-palette-1 mb-20">Bank Account Name <span className="payment-details">PT Store GG
-                    Indonesia</span></p>
-                <p className="text-lg color-palette-1 mb-20">Bank Number <span className="payment-details">1800 - 9090 -
-                    2021</span>
-                </p>
-            </div>
             <label className="checkbox-label text-lg color-palette-1">I have transferred the money
-                <input type="checkbox" />
+                <input type="checkbox" checked={checkbox} onChange={() => { setCheckbox(!checkbox) }} />
                 <span className="checkmark"></span>
             </label>
             <div className="d-md-block d-flex flex-column w-100 pt-50">
-                <a className="btn btn-confirm-payment rounded-pill fw-medium text-white border-0 text-lg"
-                    href="./complete-checkout.html" role="button">Confirm
-                    Payment</a>
+                <button className="btn btn-confirm-payment rounded-pill fw-medium text-white border-0 text-lg"
+                    type='button' onClick={onSubmit}>Confirm
+                    Payment</button>
             </div>
 
         </>

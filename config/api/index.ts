@@ -1,6 +1,23 @@
 import axios, { AxiosRequestConfig } from 'axios'
-export default async function callAPI({url,method,data}:AxiosRequestConfig) {
-    const response = await axios({url,method,data}).catch((err)=>err.response)
+import Cookies from 'js-cookie'
+
+interface callAPIProps extends AxiosRequestConfig{
+    token?:false
+}
+export default async function callAPI({url,method,data,token}:callAPIProps) {
+    let headers ={}
+    if(token){
+        const tokenCookies = Cookies.get('token')
+        if(tokenCookies){
+            const jwtToken = atob(tokenCookies)
+            headers={
+                authorization: `Bearer ${jwtToken}`
+            }
+        } 
+    }
+
+    const response = await axios({url,method,data,headers}).catch((err)=>err.response)
+    
 
     if(response.status>300){
         const res ={

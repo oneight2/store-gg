@@ -40,7 +40,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </script>
       </Head>
       <Component {...pageProps} />
-      <ToastContainer />
+      <ToastContainer position="bottom-right" />
     </>
   )
 }

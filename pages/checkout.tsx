@@ -2,13 +2,14 @@
 import Image from "next/dist/client/image"
 import CheckoutItem from "../components/organism/CheckoutItem"
 import CheckoutDetail from "../components/organism/CheckoutDetail"
-import CheckoutConfirmation from "../components/organism/CheckoutConfirmation"
 import jwtDecode from "jwt-decode"
 import { JWTPayloadTypes, UserTypes } from "../services/data-types"
+import CheckoutConfirmation from "../components/organism/CheckoutConfirmation"
 
 export default function checkout(props: { user: UserTypes }) {
+    // untuk validasi user login
     const { user } = props
-    console.log('user', user)
+    // console.log('user', user)
     return (
         <>
             {/* <!-- Checkout Content --> */}

@@ -4,6 +4,7 @@ import PaymentItem from './PaymentItem'
 import { BankTypes, NominalItemTypes, PaymentItemTypes } from '../../../services/data-types'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { toast } from 'react-toastify'
 
 
 export default function TopUpForm(props: { nominals: any, payments: any }) {
@@ -24,8 +25,9 @@ export default function TopUpForm(props: { nominals: any, payments: any }) {
         setPaymentItem(data)
     }
     const onSubmit = () => {
-        if (verifyID === '' || nominalItem === {} || paymentItem === {} || bankAccountName === '') {
-            alert('harus diisi')
+        if (verifyID === '' || Object.keys(nominalItem).length === 0 || Object.keys(paymentItem).length === 0 || bankAccountName === '') {
+            toast.error('Semua Data Harus Diisi!')
+            console.log(nominalItem)
         } else {
             const data = {
                 verifyID,
