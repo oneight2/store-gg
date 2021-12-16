@@ -2,7 +2,7 @@ import axios from "axios"
 import callAPI from "../config/api"
 import { checkoutTypes } from "./data-types"
 
-const ROOT_API = process.env.NEXT_PUBLIC_API
+const ROOT_API = process.env.NEXT_PUBLIC_API_DEV
 const API_VER = 'api/v1'
 export async function getFeaturedGame(){
     const END_POINT = 'players/landingpage'
@@ -35,4 +35,37 @@ export async function setCheckout(data:checkoutTypes){
         token:true
     })
 
+}
+export async function getMemberOverview(){
+    const url = `${ROOT_API}/${API_VER}/players/dashboard`
+
+    return callAPI({
+        url,
+        method: 'GET',
+        token:true
+    })
+
+}
+export async function getLastTransactions(valueParams:any){
+    let params = ''
+    if(valueParams === 'all'){
+        params = ''
+    }else{
+        params = `?status=${valueParams}`
+    }
+    const url = `${ROOT_API}/${API_VER}/players/history${params}`
+
+    return callAPI({
+        url,
+        method: 'GET',
+        token:true
+    })
+
+}
+export async function getHistoryDetail(id: any){
+    const END_POINT = `players/history/${id}/detail`
+
+    const axiosResponse = await axios.get(`${ROOT_API}/${API_VER}/${END_POINT}`)
+    const response = axiosResponse.data
+    return response.data
 }

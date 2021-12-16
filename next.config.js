@@ -2,6 +2,7 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ["oneight-storegg-server.herokuapp.com"],
+    domains: ["localhost"],
+    // domains: ["oneight-storegg-server.herokuapp.com"],
   },
 };

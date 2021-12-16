@@ -1,8 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 
+import { useCallback } from "react";
+import { getHistoryDetail } from "../../../services/player";
 import Row from "./Row";
 
+
 export default function TransactinsDetailContent() {
+
     return (
         <>
             <div className="ps-lg-0">

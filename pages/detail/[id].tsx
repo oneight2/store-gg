@@ -8,6 +8,8 @@ import TopUpForm from "../../components/organism/TopUpForm"
 import TopUpItem from "../../components/organism/TopUpItem"
 import { getVoucherDetail } from "../../services/player"
 import SkeletonDetail from "./SkeletonDetail"
+
+
 export default function detail() {
     const { query, isReady } = useRouter();
     const [dataItem, setDataItem] = useState({

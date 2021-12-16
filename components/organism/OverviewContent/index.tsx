@@ -1,6 +1,26 @@
+import { useCallback, useEffect, useState } from "react"
+import { toast } from "react-toastify"
+import { getMemberOverview } from "../../../services/player"
 import Category from "./Category"
 import TableRow from "./TableRow"
 export default function OverviewContent() {
+    const [count, setCount] = useState([])
+    const [data, setData] = useState([])
+
+    const getMemberOverviewAPI = useCallback(async () => {
+        const response = await getMemberOverview()
+        if (response.error) {
+            toast.error(response.message)
+        } else {
+            setCount(response.data.count)
+            setData(response.data.data)
+        }
+    }, [])
+
+    useEffect(() => {
+        getMemberOverviewAPI()
+    }, [])
+    const IMG = process.env.NEXT_PUBLIC_IMG
     return (
         <>
             <main className="main-wrapper">
@@ -10,15 +30,13 @@ export default function OverviewContent() {
                         <p className="text-lg fw-medium color-palette-1 mb-14">Top Up Categories</p>
                         <div className="main-content">
                             <div className="row">
-                                <Category icon="icon-category-dekstop" totalSpent={18000500}>
-                                    Game <br /> Dekstop
-                                </Category>
-                                <Category icon="icon-category-mobile" totalSpent={5000000}>
-                                    Game<br /> Mobile
-                                </Category>
-                                <Category icon="icon-category-other" totalSpent={2000000}>
-                                    Other<br /> Game
-                                </Category>
+                                {count.map(item => {
+                                    return (
+                                        <Category key={item._id} icon="icon-category-dekstop" totalSpent={item.value}>
+                                            Game <br /> {item.name}
+                                        </Category>
+                                    )
+                                })}
 
                             </div>
                         </div>
@@ -36,12 +54,18 @@ export default function OverviewContent() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <TableRow title="Mobile Legend: Bang Bang" category="Mobile" item={200} price={290000} status='Pending' thumbnail="overview-1" />
-                                    <TableRow title="Call of Duty: Modern War" category="Dekstop" item={200} price={290000} status='Success' thumbnail="overview-2" />
-                                    <TableRow title="Clash of Clans" category="Mobile" item={200} price={290000} status='Pending' thumbnail="overview-3" />
-                                    <TableRow title="The Royal Game" category="Mobile" item={200} price={290000} status='Failed' thumbnail="overview-4" />
-
-
+                                    {data.map(item => {
+                                        return (
+                                            <TableRow
+                                                key={item._id}
+                                                title={item.historyVoucherTopup.gameName}
+                                                category={item.category.name}
+                                                item={`${item.historyVoucherTopup.coinQuantity} ${item.historyVoucherTopup.coinName}`}
+                                                price={item.historyVoucherTopup.price}
+                                                status={item.status}
+                                                thumbnail={`${IMG}/${item.historyVoucherTopup.thumbnail}`} />
+                                        )
+                                    })}
                                 </tbody>
                             </table>
                         </div>

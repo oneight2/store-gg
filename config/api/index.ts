@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios'
 import Cookies from 'js-cookie'
 
 interface callAPIProps extends AxiosRequestConfig{
-    token?:false
+    token?:boolean
 }
 export default async function callAPI({url,method,data,token}:callAPIProps) {
     let headers ={}
@@ -17,8 +17,8 @@ export default async function callAPI({url,method,data,token}:callAPIProps) {
     }
 
     const response = await axios({url,method,data,headers}).catch((err)=>err.response)
+    const {length} = Object.keys(response.data)
     
-
     if(response.status>300){
         const res ={
             error:true,
@@ -30,7 +30,7 @@ export default async function callAPI({url,method,data,token}:callAPIProps) {
         const res ={
             error:false,
             message: 'success',
-            data:response.data.data,
+            data: length>1? response.data: response.data.data
         }
         return res
     }
