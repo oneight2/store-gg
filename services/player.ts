@@ -62,10 +62,25 @@ export async function getLastTransactions(valueParams:any){
     })
 
 }
-export async function getHistoryDetail(id: any){
-    const END_POINT = `players/history/${id}/detail`
+export async function getTransactionDetail(id: String, token: string){
+    const url = `${ROOT_API}/${API_VER}/players/history/${id}/detail`
 
-    const axiosResponse = await axios.get(`${ROOT_API}/${API_VER}/${END_POINT}`)
-    const response = axiosResponse.data
-    return response.data
+    return callAPI({
+        url,
+        method: 'GET',
+        serverToken: token
+    })
+
+}
+
+export async function updateProfile(data : FormData){
+    const url = `${ROOT_API}/${API_VER}/players/profile`
+
+    return callAPI({
+        url,
+        method: 'PUT',
+        data,
+        token:true
+    })
+
 }

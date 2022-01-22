@@ -62,12 +62,13 @@ export default function SignUpPhoto() {
                                 <label htmlFor="avatar">
                                     <img src={imgPreview} className="img-upload" alt="signup-photo" />
                                 </label>
-                                <input id="avatar" type="file" name="avatar" accept="image/png, image/jpeg" onChange={(event) => {
-                                    const img: any = event.target.files[0];
-                                    setImgPreview(URL.createObjectURL(img))
-                                    setImage(img)
+                                <input id="avatar" type="file" name="avatar" accept="image/png, image/jpeg"
+                                    onChange={(event) => {
+                                        const img: any = event.target.files[0];
+                                        setImgPreview(URL.createObjectURL(img))
+                                        setImage(img)
 
-                                }} />
+                                    }} />
                             </div>
                         </div>
                         <h2 className="fw-bold text-xl text-center color-palette-1 m-0">{localForm.name}</h2>

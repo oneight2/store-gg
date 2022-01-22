@@ -1,11 +1,13 @@
+import jwtDecode from "jwt-decode";
 import EditProfile from "../../components/organism/EditProfile";
 import Sidebar from "../../components/organism/Sidebar";
+import { JWTPayloadTypes, UserTypes } from "../../services/data-types";
 
 export default function editProfile() {
     return (
         <>
             <section className="edit-profile overflow-auto">
-                <Sidebar />
+                <Sidebar activeMenu="settings" />
                 <main className="main-wrapper">
                     <div className="ps-lg-0">
                         <h2 className="text-4xl fw-bold color-palette-1 mb-30">Settings</h2>

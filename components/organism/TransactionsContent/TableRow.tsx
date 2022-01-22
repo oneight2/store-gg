@@ -20,6 +20,7 @@ export default function TableRow(props: TableRowProps) {
         'failed': status === "failed"
     })
     return (
+
         <>
             <tr data-category="pending" className="align-middle">
                 <th scope="row">

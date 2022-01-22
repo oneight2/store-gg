@@ -11,7 +11,7 @@ export default function TransactionsContent() {
 
     const getLastTransactionsAPI = useCallback(async (value) => {
         const response = await getLastTransactions(value)
-        console.log(response)
+        // console.log('response', response)
         if (response.error) {
             toast.error(response.message)
         } else {
@@ -26,7 +26,6 @@ export default function TransactionsContent() {
     const onTabClick = (value: any) => {
         setTab(value)
         getLastTransactionsAPI(value)
-        console.log(value)
     }
     const IMG = process.env.NEXT_PUBLIC_IMG
     return (
@@ -68,7 +67,7 @@ export default function TransactionsContent() {
                                         <TableRow
                                             key={item._id}
                                             title={item.historyVoucherTopup.gameName}
-                                            category={item.category.name}
+                                            category={item.historyVoucherTopup.category}
                                             item={`${item.historyVoucherTopup.coinQuantity} ${item.historyVoucherTopup.coinName}`}
                                             price={item.historyVoucherTopup.price}
                                             status={item.status}
