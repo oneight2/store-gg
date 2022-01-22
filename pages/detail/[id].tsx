@@ -6,37 +6,20 @@ import Footer from "../../components/organism/Footer"
 import Navbar from "../../components/organism/Navbar"
 import TopUpForm from "../../components/organism/TopUpForm"
 import TopUpItem from "../../components/organism/TopUpItem"
-import { getVoucherDetail } from "../../services/player"
+import { GameItemTypes, NominalItemTypes, PaymentItemTypes } from "../../services/data-types"
+import { getFeaturedGame, getVoucherDetail } from "../../services/player"
 import SkeletonDetail from "./SkeletonDetail"
 
+interface DetailProps {
+    dataItem: GameItemTypes,
+    dataNominal: NominalItemTypes[],
+    dataPayment: PaymentItemTypes[]
+}
 
-export default function detail() {
-    const { query, isReady } = useRouter();
-    const [dataItem, setDataItem] = useState({
-        name: '',
-        thumbnail: '',
-        category: {
-            name: ''
-        }
-    })
-    const [dataNominal, setDataNominal] = useState([])
-    const [dataPayment, setDataPayment] = useState([])
-    const [Loading, setLoading] = useState(true)
-
-    const getVoucherDetailAPI = useCallback(async (id) => {
-        const data = await getVoucherDetail(id)
-        setDataItem(data.detail)
-        setDataNominal(data.detail.nominals)
-        setDataPayment(data.payment)
-        localStorage.setItem('data-item', JSON.stringify(data.detail))
-    }, [])
+export default function detail({ dataItem, dataNominal, dataPayment }: DetailProps) {
     useEffect(() => {
-        if (isReady) {
-            getVoucherDetailAPI(query.id)
-        } else {
-            return setLoading(false)
-        }
-    }, [isReady])
+        localStorage.setItem('data-item', JSON.stringify(dataItem))
+    }, [])
     return (
         <>
             <Navbar />
@@ -62,4 +45,42 @@ export default function detail() {
 
         </>
     )
+}
+
+export async function getStaticPaths() {
+    const data = await getFeaturedGame()
+
+    // get paths untuk mendapatkan semua id game
+    const paths = data.map((item: GameItemTypes) => ({
+        params: {
+            id: item._id
+        }
+    }))
+
+    console.log('paths', paths)
+    return {
+        paths,
+        fallback: false
+        // bawaan harus ada fallback
+    }
+}
+
+interface GetStaticProps {
+    params: {
+        id: string
+    }
+}
+
+// dimana ada StaticPaths disitu ada StaticProps
+export async function getStaticProps({ params }: GetStaticProps) {
+    const { id } = params
+    const data = await getVoucherDetail(id)
+    console.log('detail Voucher', data)
+    return {
+        props: {
+            dataItem: data.detail,
+            dataNominal: data.detail.nominals,
+            dataPayment: data.payment
+        }
+    }
 }

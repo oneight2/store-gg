@@ -91,7 +91,7 @@ export default function EditProfile() {
                         })} />
                 </div>
                 <div className="pt-30">
-                    <Input label="Email Address" value={user.email} disabled />
+                    <Input label="Email Address" value={user.email} disabled placeholder={""} />
                 </div>
                 {/* <div className="pt-30">
                     <Input label="Phone" placeholder="Enter Number" />

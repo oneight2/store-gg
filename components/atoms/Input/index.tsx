@@ -1,6 +1,8 @@
 export interface InputProps {
     label: string,
-    placeholder: string
+    placeholder: string,
+    value: any,
+    disabled: any,
 }
 export default function Input(props: InputProps) {
     const { label, ...nativeProps } = props
