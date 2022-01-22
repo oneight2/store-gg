@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import Cookies from "js-cookie"
 import jwtDecode from "jwt-decode"
