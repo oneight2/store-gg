@@ -9,7 +9,6 @@ import CheckoutConfirmation from "../components/organism/CheckoutConfirmation"
 export default function checkout(props: { user: UserTypes }) {
     // untuk validasi user login
     const { user } = props
-    // console.log('user', user)
     return (
         <>
             {/* <!-- Checkout Content --> */}

@@ -9,11 +9,21 @@ import Navbar from '../components/organism/Navbar';
 import Reached from '../components/organism/Reached';
 import Story from '../components/organism/Story';
 import TransactionStep from '../components/organism/TransactionStep';
+import Head from 'next/dist/shared/lib/head';
 
 const Home: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>StoreGG - Get a New
+          Experience in Gaming</title>
+        <meta name="description" content="Kami menyediakan jutaan cara untuk membantu
+players menjadi pemenang sejati" />
+        <meta property='og:title' content="StoreGG" />
+        <meta property='og:description' content="Kami menyediakan jutaan cara untuk membantu
+players menjadi pemenang sejati" />
+      </Head>
       <Navbar />
       <MainBanner />
       <TransactionStep />

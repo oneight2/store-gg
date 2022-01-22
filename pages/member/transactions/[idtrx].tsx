@@ -1,9 +1,7 @@
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import jwtDecode from "jwt-decode";
 import Sidebar from "../../../components/organism/Sidebar";
 import TransactinsDetailContent from "../../../components/organism/TransactionsDetailContent";
 import { HistoryTransactionTypes, JWTPayloadTypes, UserTypes } from "../../../services/data-types";
-import jwtDecode from "jwt-decode";
 import { getTransactionDetail } from "../../../services/player";
 
 interface TransactionDetailProps {
@@ -29,7 +27,6 @@ export default function detail(props: TransactionDetailProps) {
 export async function getServerSideProps({ req, params }: any) {
     const { token } = req.cookies;
     const { idtrx } = params
-    console.log('params', params)
     if (!token) {
         return {
             redirect: {
@@ -45,7 +42,6 @@ export async function getServerSideProps({ req, params }: any) {
     const IMG = process.env.NEXT_PUBLIC_IMG
     userFromPayload.avatar = `${IMG}/${userFromPayload.avatar}`
     const response = await getTransactionDetail(idtrx, jwtToken)
-    console.log(response)
     return {
         props: {
             transactionDetail: response.data

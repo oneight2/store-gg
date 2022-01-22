@@ -27,7 +27,6 @@ export default function TopUpForm(props: { nominals: any, payments: any }) {
     const onSubmit = () => {
         if (verifyID === '' || Object.keys(nominalItem).length === 0 || Object.keys(paymentItem).length === 0 || bankAccountName === '') {
             toast.error('Semua Data Harus Diisi!')
-            console.log(nominalItem)
         } else {
             const data = {
                 verifyID,

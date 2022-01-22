@@ -11,7 +11,6 @@ export default function TransactionsContent() {
 
     const getLastTransactionsAPI = useCallback(async (value) => {
         const response = await getLastTransactions(value)
-        // console.log('response', response)
         if (response.error) {
             toast.error(response.message)
         } else {

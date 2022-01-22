@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 export interface StepItemProps {
     icon: './icon/step1.svg' | './icon/step2.svg' | './icon/step3.svg',
     title: string,

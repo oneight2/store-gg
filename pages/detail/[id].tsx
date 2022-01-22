@@ -1,14 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/no-unknown-property */
-import { useRouter } from "next/router"
-import { useCallback, useEffect, useState } from "react"
+import { useEffect } from "react"
 import Footer from "../../components/organism/Footer"
 import Navbar from "../../components/organism/Navbar"
 import TopUpForm from "../../components/organism/TopUpForm"
 import TopUpItem from "../../components/organism/TopUpItem"
 import { GameItemTypes, NominalItemTypes, PaymentItemTypes } from "../../services/data-types"
 import { getFeaturedGame, getVoucherDetail } from "../../services/player"
-import SkeletonDetail from "./SkeletonDetail"
 
 interface DetailProps {
     dataItem: GameItemTypes,
@@ -57,7 +56,6 @@ export async function getStaticPaths() {
         }
     }))
 
-    console.log('paths', paths)
     return {
         paths,
         fallback: false
@@ -75,7 +73,6 @@ interface GetStaticProps {
 export async function getStaticProps({ params }: GetStaticProps) {
     const { id } = params
     const data = await getVoucherDetail(id)
-    console.log('detail Voucher', data)
     return {
         props: {
             dataItem: data.detail,

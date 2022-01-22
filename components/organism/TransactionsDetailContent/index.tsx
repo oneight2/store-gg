@@ -10,7 +10,6 @@ interface transactionContentProps {
 
 export default function TransactinsDetailContent(props: transactionContentProps) {
     const { data } = props
-    console.log(data)
     const IMG = process.env.NEXT_PUBLIC_IMG
     return (
         <>

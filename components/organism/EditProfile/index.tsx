@@ -1,14 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import Cookies from "js-cookie"
-import Image from "next/image"
-import { useEffect, useState } from "react"
-import { JWTPayloadTypes, UserTypes } from "../../../services/data-types"
-import Input from "../../atoms/Input"
 import jwtDecode from "jwt-decode"
-import { updateProfile } from "../../../services/player"
-import { toast } from "react-toastify"
-import { route } from "next/dist/server/router"
 import { useRouter } from "next/router"
+import { useEffect, useState } from "react"
+import { toast } from "react-toastify"
+import { JWTPayloadTypes, UserTypes } from "../../../services/data-types"
+import { updateProfile } from "../../../services/player"
+import Input from "../../atoms/Input"
 export default function EditProfile() {
     const [user, setUser] = useState({
         avatar: '',
@@ -32,7 +30,6 @@ export default function EditProfile() {
     }, [])
 
     const onSubmit = async () => {
-        console.log('data', user)
 
         const data = new FormData;
         data.append('image', user.avatar)
