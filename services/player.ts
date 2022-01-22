@@ -2,7 +2,7 @@ import axios from "axios"
 import callAPI from "../config/api"
 import { checkoutTypes } from "./data-types"
 
-const ROOT_API = process.env.NEXT_PUBLIC_API_DEV
+const ROOT_API = process.env.NEXT_PUBLIC_API
 const API_VER = 'api/v1'
 export async function getFeaturedGame(){
     const END_POINT = 'players/landingpage'
