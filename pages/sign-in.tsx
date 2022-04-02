@@ -21,21 +21,3 @@ export default function signIn() {
         </>
     )
 }
-// export async function getServerSideProps({ req }: any) {
-//     const { token } = req.cookies
-//     if (token) {
-//         return {
-//             redirect: {
-//                 destination: '/',
-//                 permanent: false
-//             }
-//         }
-//     } else {
-//         return {
-//             redirect: {
-//                 destination: '/sign-in',
-//                 permanent: false
-//             }
-//         }
-//     }
-// }
